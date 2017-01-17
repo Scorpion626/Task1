@@ -6,7 +6,7 @@ class Analayze
   end
 
 
-  attr_accessor :xml_final
+  attr_reader :xml_final
 
   def parse
 
