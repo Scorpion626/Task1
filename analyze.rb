@@ -2,23 +2,27 @@ class Analayze
 
   def initialize(str)
     @xml = str
+    @xml_final = Array.new
   end
-    @@xml_final = Array.new
+
+
+  attr_accessor :xml_final
+
   def parse
 
-    @xml.each {|i|
+    @xml.each { |i|
       index = /<template name="([-zA-z"]+)/ =~ i
       unless index.nil?
         name_start = i[index, i.size].scan(/name="([-zA-z"]+)"/)
-        @@xml_final += name_start
+        @xml_final += name_start
       end
     }
-     return @@xml_final
+    return @xml_final
   end
 
   def save_to_file(name)
     File.open(name, 'w') do |f|
-      @@xml_final.each {|i| f.puts"#{i}"}
+      @xml_final.each { |i| f.puts "#{i}" }
     end
   end
 
